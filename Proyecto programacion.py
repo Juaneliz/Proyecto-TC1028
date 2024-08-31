@@ -4,14 +4,34 @@ def cfe(a):
 def cea(b):
     pago_1= b*7.12
     return(pago_1)
-def agregar_cuenta(a,b,c,d):
-    nombre=a
-    colonia=b
+def agregar_cuenta(a,b):
+    if a=="vivienda":
+        costo_in=200*b
+        costo_t=costo_in*1.16
+        return(costo_t)
+    elif a=="industrial":
+        costo_in=256.2*b
+        costo_t=costo_in*1.16
+        return(costo_t)
+
     
     
 print("Hola, bienvenido a la pagina oficial del gobierno de pago de servicios publicos en linea.")
 casa=str(input("Por favor define cual es el proposito de tu visita a la pagina web:\n 1. Crear cuenta para servicios\n 2. Cancelar cuenta\n3. Checar cuenta y servicios.\nPor favor poner el numero del proceso seleccionado:"))
-        
+if casa ==1:
+    print("Perfecto, por favor dinnos en que region de las siguientes te encuentras: \n Juriquilla \n Corregidora \n Milenio \n Refugio \n Tlacote \n Centro \n Otra")
+    seccion=str(input("Porfavor aqui escribe la region como esta escrita en el programa:"))
+    if seccion=="Juriquilla":
+        toma_agua=str(input("Digannos si su toma de agua es de vivienda o industrial."))
+        calculo_gasto=int(input("Por favor, en promedio como cuanto supone en consumir de agua en metros cubicos\n(1 metro cubico=1000litros):"))
+        print("El costo de su apertura de cuenta es de:",agregar_cuenta(toma_agua,calculo_gasto,"pesos"))
+    if seccion=="Corregidora":
+        toma_agua1=str(input("Digannos si su toma de agua es de vivienda o industrial."))
+        calculo_gasto1=int(input("Por favor, en promedio como cuanto supone en consumir de agua en metros cubicos\n(1 metro cubico=1000litros):"))
+        costo_corregidora=agregar_cuenta(toma_agua1,calculo_gasto1)
+        costo=costo_corregidora*1.30
+        print("El costo de su apertura de cuenta es de:",costo,"pesos")
+
 if casa==3:
     opcion=int(input("Porfavor escribe el numero del tramite a realizar de los siguientes:\n 1. CFE\n 2. CEA\n 3.Imss\n4.Multas\n Por favor aqui escribe cual es el caso:  "))
     if opcion==1:
