@@ -5,21 +5,29 @@ def cea(a,b):
     calc_1= a*b
     saldo_1=calc_1*0.03
     return(saldo_1)
-def agregar_cuenta_cea(a,b):
-    if a=="vivienda":
-        costo_in=1000*b
-        costo_t=costo_in*0.03
-        costo_fin=costo_t+400
-        return(costo_fin)
-    elif a=="industrial":
-        costo_in=1000*b
-        costo_t=costo_in*0.03
-        costo_final=costo_t+3500
-        return(costo_final)
-def agregar_cuenta_impuestos(a,b):
-    cuenta=1.16*a
-    cuenta1=(cuenta+b)/2
-    return(cuenta1)
+def agregar_cuenta(opcion,a,b):
+    if opcion==1:
+        if a=="vivienda":
+            costo_in=.5*b
+            costo_t=costo_in*0.650
+            costo_fin=costo_t+400
+            return(costo_fin*1.30)
+        elif a=="industrial":
+            costo_in=1000*b
+            costo_t=costo_in*0.03
+            costo_final=costo_t+3500
+            return(costo_final*1.30)
+    if opcion ==2:
+        if a=="vivienda":
+            costo_in=1000*b
+            costo_t=costo_in*0.03
+            costo_fin=costo_t+400
+            return(costo_fin*1.30)
+        elif a=="industrial":
+            costo_in=1000*b
+            costo_t=costo_in*0.03
+            costo_final=costo_t+3500
+            return(costo_final*1.30)
 def cancelacion_cuenta(años,cancelacion_luz,saldo_pendiente):
     if cancelacion_luz==1:
         cuota_cancelacion=0
@@ -29,8 +37,14 @@ def cancelacion_cuenta(años,cancelacion_luz,saldo_pendiente):
             cuota_cancelacion=0
     
     return(cuota_cancelacion)
+def agregar_datos(nombre_completo,edad,codigo_postal,numero_cel,):
+    lista=[]
+    lista.append(nombre_completo)
+    lista.append(edad)
+    lista.append(codigo_postal)
+    lista.append(numero_cel)
+    return lista
 # Cada litro de agua cuesta 0.03 pesos
-lista=[]
 
 print("Hola, bienvenido a la pagina oficial del gobierno de pago de servicios publicos en linea.")
 contador=0
@@ -40,25 +54,54 @@ while contador<1:
         print("Por favor reinicie el programa, debido a que no tenemos la opcion seleccionada")
     if casa ==1:
         opcion=int(input("Porfavor escribe el numero del servicio que requiere crear a realizar de los siguientes:\n 1. CFE\n 2. CEA\nPor favor aqui escribe el numero del caso:  "))
+        print("Perfecto, te tomaremos una serie de datos para tener un usuario de cuenta preparado")
+        nombre_completo=str(input("Nombre completo con apellidos"))
+        edad=int(input("Edad en digitos"))
+        codigo_postal=int(input("Codigo postal:"))
+        numero_cel=int(input("Numero celular +52(si es otro usted agregue la digitalizacion de su pais correspondeinte)"))
         print("Perfecto, por favor dinnos en que region de las siguientes te encuentras: \n Juriquilla \n Corregidora \n Refugio")
         seccion=str(input("Porfavor aqui escribe la region como esta escrita en el programa:"))
-        if opcion == 2:
+        if opcion ==1:           
+            if seccion=="Juriquilla":
+                corriente=str(input("Digannos si su corriente es de vivienda o industrial."))
+                calculo_gasto=int(input("Por favor, en promedio como cuanto supone en consumir de energia en kilowatts\n(persona promedio consume aproximadamente entre 250-400kw al mes):"))
+                print("El costo de su apertura de cuenta es de:","%.3f"%agregar_cuenta(opcion,corriente,calculo_gasto),"pesos")
+            elif seccion=="Corregidora":
+                corriente=str(input("Digannos si su toma de agua es de vivienda o industrial."))
+                calculo_gasto1=int(input("Por favor, en promedio como cuanto supone en consumir de energia en kilowatts\n(persona promedio consume aproximadamente entre 250-400kw al mes):"))
+                costo_corregidora=agregar_cuenta(opcion,corriente,calculo_gasto1)
+                print("El costo de su apertura de cuenta es de:",costo_corregidora,"pesos")
+            elif seccion=="Refugio":
+                corriente=str(input("Digannos si su toma de agua es de vivienda o industrial."))
+                calculo_gasto1=int(input("Por favor, en promedio como cuanto supone en consumir de energia en kilowatts\n(persona promedio consume aproximadamente entre 250-400kw al mes):"))
+                costo_refugio=agregar_cuenta(opcion,corriente,calculo_gasto1)
+                print("El costo de su apertura de cuenta es de:",costo_refugio,"pesos")
+            datos=agregar_datos(nombre_completo,edad,codigo_postal,numero_cel)
+            print("Perfecto sus datos de su cuenta son los siguientes",datos)
+            reinicio=str(input("Si desea realizar otra accion escriba Si. De lo contrario escriba No"))
+            if reinicio=="Si":
+                contador=0
+            else:
+                contador=contador+1
+            
+        if opcion == 2:            
             if seccion=="Juriquilla":
                 toma_agua=str(input("Digannos si su toma de agua es de vivienda o industrial."))
                 calculo_gasto=int(input("Por favor, en promedio como cuanto supone en consumir de agua en metros cubicos\n(1 metro cubico=1000litros):"))
-                print("El costo de su apertura de cuenta es de:","%.3f"%agregar_cuenta_cea(toma_agua,calculo_gasto),"pesos")
+                print("El costo de su apertura de cuenta es de:","%.3f"%agregar_cuenta(opcion,toma_agua,calculo_gasto),"pesos")
             elif seccion=="Corregidora":
                 toma_agua1=str(input("Digannos si su toma de agua es de vivienda o industrial."))
                 calculo_gasto1=int(input("Por favor, en promedio como cuanto supone en consumir de agua en metros cubicos\n(1 metro cubico=1000litros):"))
-                costo_corregidora=agregar_cuenta_cea(toma_agua1,calculo_gasto1)
-                costo=costo_corregidora*1.30
-                print("El costo de su apertura de cuenta es de:",costo,"pesos")
+                costo_corregidora=agregar_cuenta(opcion,toma_agua1,calculo_gasto1)
+                print("El costo de su apertura de cuenta es de:",costo_corregidora,"pesos")
             elif seccion=="Refugio":
                 toma_agua1=str(input("Digannos si su toma de agua es de vivienda o industrial."))
                 calculo_gasto1=int(input("Por favor, en promedio como cuanto supone en consumir de agua en metros cubicos\n(1 metro cubico=1000litros):"))
-                costo_corregidora=agregar_cuenta_cea(toma_agua1,calculo_gasto1)
-                costo=costo_corregidora*1.30
-                print("El costo de su apertura de cuenta es de:",costo,"pesos")
+                costo_refugio=agregar_cuenta(opcion,toma_agua1,calculo_gasto1)
+
+                print("El costo de su apertura de cuenta es de:",costo_refugio,"pesos")
+            datos=agregar_datos(nombre_completo,edad,codigo_postal,numero_cel)
+            print("Perfecto sus datos de su cuenta son los siguientes",datos)
             reinicio=str(input("Si desea realizar otra accion escriba Si. De lo contrario escriba No"))
             if reinicio=="Si":
                 contador=0
