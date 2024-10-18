@@ -199,7 +199,8 @@ while contador < 1:
                   "%.3f" % agregar_cuenta(opcion, corriente, calculo_gasto), "pesos")
         elif opcion == 2:
             toma_agua = str(input("Indique si su toma de agua es de vivienda o industrial: "))
-            calculo_gasto = int(input("Ingrese su consumo estimado de agua en metros cúbicos: "))
+            calculo_gasto = int(input("Ingrese su consumo estimado de agua en metros cúbicos: "
+                                      +"(1metro cubico=1000litros)"))
             print("El costo de su apertura de cuenta es de: "
                   +"%.3f" % agregar_cuenta(opcion, toma_agua, calculo_gasto), "pesos")
 
@@ -212,7 +213,8 @@ while contador < 1:
                                 +"Seleccione el número: "))
         años = int(input("Ingrese los años de servicio: "))
         cancelacion = int(input("Motivo de cancelación: 1. Falla en medidor, "
-                                +"2. Cambio de proveedor, 3. Falla de mantenimiento: "))
+                                +"2. Cambio de proveedor, 3. Falla de mantenimiento"
+                                +"(escriba el numero del motivo): "))
         saldo_pendiente = str(input("¿Tiene saldo pendiente? (Si/No): "))
         costo_canc = cancelacion_cuenta(años,opcion_canc,saldo_pendiente)
         print("Su cuota de cancelación es:"," %.3f"%costo_canc, "pesos")
