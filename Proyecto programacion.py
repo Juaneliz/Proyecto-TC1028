@@ -182,22 +182,23 @@ while contador < 1:
         opcion = int(input("Seleccione el servicio:\n 1. CFE\n 2. CEA\n"
                            +"Seleccione el número: "))
         print("Por favor, introduzca la información solicitada.")
-        nombre_completo = input("Nombre completo con apellidos: ")
-        edad = int(input("Edad en dígitos: "))
+        nombre_completo = str(input("Nombre completo con apellidos: "))
+        edad = int(input("Edad en dígitos(0-99): "))
         codigo_postal = int(input("Código postal: "))
         numero_cel = int(input(
             "Número celular +52 (si es otro, usted agregue la "
-            "digitalización de su país correspondiente): "))
-        seccion = input("Seleccione su región:\n Juriquilla\n Corregidora\n"
-                        +" Refugio\nEscriba su región: ")
+            "digitalización de su país correspondiente): "
+            +"Escribalo sin espacios:"))
+        seccion =str(input("Seleccione su región:\n Juriquilla\n Corregidora\n"
+                        +" Refugio\nEscriba su región: "))
 
         if opcion == 1:
-            corriente = input("Indique si su corriente es de vivienda o industrial: ")
+            corriente = str(input("Indique si su corriente es de vivienda o industrial: "))
             calculo_gasto = int(input("Ingrese su consumo estimado de energía en kilowatts: "))
             print("El costo de su apertura de cuenta es de: ",
                   "%.3f" % agregar_cuenta(opcion, corriente, calculo_gasto), "pesos")
         elif opcion == 2:
-            toma_agua = input("Indique si su toma de agua es de vivienda o industrial: ")
+            toma_agua = str(input("Indique si su toma de agua es de vivienda o industrial: "))
             calculo_gasto = int(input("Ingrese su consumo estimado de agua en metros cúbicos: "))
             print("El costo de su apertura de cuenta es de: "
                   +"%.3f" % agregar_cuenta(opcion, toma_agua, calculo_gasto), "pesos")
@@ -231,13 +232,14 @@ while contador < 1:
             cobro = cea(personas, litros)
             print("El saldo estimado es: ", "%.3f" % cobro, "pesos")
 
-        metodo_pago = input("¿Cómo desea pagar? (Efectivo/Tarjeta): ")
+        metodo_pago = str(input("¿Cómo desea pagar? (Efectivo/Tarjeta): "
+                                +"Escribalo como se observa en pantalla:"))
         matriz = creacion_matriz(casa, matriz, "", opcion, "", cobro, metodo_pago, "", "", "")
 
-    reinicio = input("¿Desea realizar otra acción? (Si/No): ")
+    reinicio = str(input("¿Desea realizar otra acción? (Si/No): "))
     if reinicio != "Si":
         contador += 1
 
 # Mostrar todos los movimientos registrados al final
-ver_movimientos = input("¿Desea ver todos los movimientos realizados? (Si/No): ")
+ver_movimientos = str(input("¿Desea ver todos los movimientos realizados? (Si/No): "))
 registros(ver_movimientos, matriz)
